@@ -26,7 +26,12 @@ Home
                     <div class="text-left">
                         <br><br>
                         <h4>Current Moisture Level</h4>
-                        <h4 id="text">0%</h4>
+                        <div class="row">
+                            <div class="col-md-4">Field 1: <h4 id="text">0%</h4></div>
+                            <div class="col-md-4">Field 2: <h4 id="text2">0%</h4></div>
+                            <div class="col-md-4">Field 3: <h4 id="text3">0%</h4></div>
+                        </div>
+                        
                     </div>
                     <br>
                     <div class="text-right">
@@ -40,8 +45,14 @@ Home
 
 <script>
 
+
+
 var counter = 0;
-var state = 0;
+var state = 1;
+
+// identifier for which label to updates
+var change = 1;
+
 function changeImage(){
 
     images = ["http://ec2-3-14-152-181.us-east-2.compute.amazonaws.com/images/irrigation.jpg ",
@@ -53,11 +64,26 @@ function changeImage(){
 
     var image = document.getElementById("dynamicImage");
     var text = document.getElementById("text")
+    var text2 = document.getElementById("text2")
+    var text3 = document.getElementById("text3")
 
-    text.innerHTML = percents[counter];
+    if (change == 1){
+        text.innerHTML = percents[counter];
+    }
+    else if(change == 2){
+        text2.innerHTML = percents[counter];
+    }
+
+    else if(change == 3){
+
+        text3.innerHTML = percents[counter];
+    }
+
+    // divisible by 5 to verify its five seconds
     if (counter % 5 == 0){
         // change the imge
         image.src = images[state];
+        
         if (state == 3){
             state = 0;
         }
@@ -67,6 +93,10 @@ function changeImage(){
 
         // set counter to 0
         counter = 0;
+        if (change==3){
+            change = 0;
+        }
+        change ++;
     }
     
     counter ++;

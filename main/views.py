@@ -7,8 +7,12 @@ def home(request):
         # context for the website
         # api call
         time = getTime()['time']
+
+        # convert the time into milliseconds
+        timeMs = time * 1000
         context = {
-            "time": time
+            "time": time,
+            "timeMs": timeMs
         }
         return render(request, 'main/index.html', context)
     else:
