@@ -6,20 +6,25 @@ var state = 1;
 // identifier for which label to updates
 var change = 1;
 
+// function to change the image
 function changeImage(){
 
+    // list of images
     images = ["http://ec2-3-14-152-181.us-east-2.compute.amazonaws.com/images/irrigation.jpg ",
              "http://ec2-3-14-152-181.us-east-2.compute.amazonaws.com/images/irrigation_3.jpg ",
               "http://ec2-3-14-152-181.us-east-2.compute.amazonaws.com/images/irrigation_2.jpg ",
                "http://ec2-3-14-152-181.us-east-2.compute.amazonaws.com/images/irrigation_1.jpg "]
 
+    // list of perents
     percents = ["0%", "20%", "40%", "60%", "80%", "100%"]
 
+    // get all the html contents to updte
     var image = document.getElementById("dynamicImage");
     var text = document.getElementById("text")
     var text2 = document.getElementById("text2")
     var text3 = document.getElementById("text3")
 
+    // check for change and change the content likewise
     if (change == 1){
         text.innerHTML = percents[counter];
     }
@@ -42,6 +47,8 @@ function changeImage(){
         }
         state ++;
     }
+
+    // if the count ends reset it
     if (counter == 5){
 
         // set counter to 0
@@ -52,6 +59,7 @@ function changeImage(){
         change ++;
     }
     
+    // increment counter
     counter ++;
 }
 
