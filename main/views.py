@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 import requests
 # Create your views here.
@@ -12,7 +12,7 @@ def home(request):
         }
         return render(request, 'main/index.html', context)
     else:
-        return redirect("accounts:login")
+        return redirect("accounts:login_user")
 
 # here is the main logic for the program
 # api call for time 
