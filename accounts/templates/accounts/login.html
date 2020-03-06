@@ -24,12 +24,14 @@
                 
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control"><br>
+                        {% if error_message %}
+                        <i id="finish2">Please Check your Username or Password</i>
+                        <br>
+                    {% endif %}
                         <br>
                         <input type="submit" class="btn btn-danger" value="Login">
                         <br><br>
-                        {% if error_message %}
-                            <i class="red">Please Check your Username or Password</i>
-                        {% endif %}
+
                         <i>Not Registered? Register a Free Account</i><a href="{% url 'accounts:register_user' %}"> Here!</a>
                     </form>
                 </div>
