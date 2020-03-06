@@ -1,3 +1,5 @@
+
+
 var counter = 0;
 var state = 1;
 
@@ -53,8 +55,10 @@ function changeImage(){
     counter ++;
 }
 
+// main loader function when the simulate button is clicked
     function loader() {
-
+        
+        // run it in interval of 1 second
         myLoad = setInterval(changeImage, 1000);
 
         var click = document.getElementById("click");
