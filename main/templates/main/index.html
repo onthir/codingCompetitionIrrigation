@@ -4,8 +4,141 @@
     Home
 {% endblock %}
 
+{% load staticfiles %}
 {% block content %}
 
-<h2 class="text-center">Welcome to Irrigation Project</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="text-center">Welcome to Irrigation Simulation</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <img src="{% static 'img/step1.jpg' %}" id="dynamicImage" alt="" class="img-fluid" width="600">
+
+                </div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Controller</h3>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-success" onclick="loader();">Start Simulation</a>
+                        <br>
+                        <br><a href="#" class="btn btn-danger" onclick="stopper()" id="stop">Stop Simulation</a>
+                    </div>
+                    <div class="text-left">
+                        <br><br>
+                        <h4>Current Moisture Level</h4>
+                        <h4 id="text">0%</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+   
+// global variables for comparision
+var counter = 1;
+var checker = 0;
+// function to change text every second
+function changeText(){
+    var text = document.getElementById("text");
+
+    // change the text
+    if (checker == 0){
+        text.innerHTML = "0%";
+    }
+    // change the text
+    else if (checker == 1){
+        text.innerHTML = "20%";
+    }
+
+    else if (checker == 2){
+        text.innerHTML = "40%";
+    }
+
+    else if (checker == 3){
+        text.innerHTML = "60%";
+    }
+
+    else if (checker == 4){
+        text.innerHTML = "80%";
+    }
+
+    else if (checker == 5){
+        text.innerHTML = "100%";
+    }
+
+    else{
+        checker = 0;
+    }
+    // invrement checker
+    checker ++;
+}
+
+   // function to change the text and image every 5 seconds untill the stop button is triggered
+function loadImage(){
+    // get the html tag for the image
+    var image = document.getElementById("dynamicImage");
+    var text = document.getElementById("text");
+    // change the image in every five seconds
+    if (counter == 0){
+        // show the default image
+        image.src = "{% static 'img/step1.jpg' %}"
+
+        // set the current percentage to 0
+        myVar = setInterval(changeText, 1000);
+
+    }
+
+    else if(counter ==1){
+        // show the default image
+        image.src = "{% static 'img/step4.jpg' %}"
+
+        // set the current percentage to 0
+        myVar = setInterval(changeText, 1000);
+
+
+    }
+
+    else if(counter ==2){
+        // show the default image
+        image.src = "{% static 'img/step3.jpg' %}"
+
+        // set the current percentage to 0
+        myVar = setInterval(changeText, 1000);
+
+
+    }
+
+    else if(counter ==3){
+        // show the default image
+        image.src = "{% static 'img/step2.jpg' %}"
+
+        // set the current percentage to 0
+        myVar = setInterval(changeText, 1000);
+
+        // increment counter by 1
+    }
+
+    else{
+        counter = 0;
+    }
+
+    // increment counter
+    counter ++;
+
+}
+
+function loader(){
+
+    myLoad = setInterval(loadImage, 5000);
+
+};
+
+
+
+
+</script>
+
 
 {% endblock %}
