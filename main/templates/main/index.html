@@ -28,6 +28,10 @@ Home
                         <h4>Current Moisture Level</h4>
                         <h4 id="text">0%</h4>
                     </div>
+                    <br>
+                    <div class="text-right">
+                        <a href="{% url 'accounts:logout_user' %}" class="btn btn-primary">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,9 +88,10 @@ Home
         // change the image in every five seconds
         if (counter == 0) {
             // show the default image
-            image.src = "{% static 'img/step1.jpg' %}"
+            image.src = "{% static 'img/step2.jpg' %}"
             // set the current percentage to 0
             myVar = setInterval(changeText, 1000);
+            alert("Running")
 
 
         }

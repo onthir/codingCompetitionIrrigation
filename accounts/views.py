@@ -82,7 +82,7 @@ def profile(request):
         # check the count
         if profile.count() >= 1:
             # prompt to edit the phone number
-            pass
+            return redirect("main:home")
         else:
             if request.method == "POST":
                 form = ProfileForm(request.POST or None)
