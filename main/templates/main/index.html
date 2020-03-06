@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    Home
+Home
 {% endblock %}
 
 {% load staticfiles %}
@@ -35,111 +35,113 @@
 </div>
 
 <script>
-   
-// global variables for comparision
-var counter = 1;
-var checker = 0;
-// function to change text every second
-function changeText(){
-    var text = document.getElementById("text");
 
-    // change the text
-    if (checker == 0){
-        text.innerHTML = "0%";
-    }
-    // change the text
-    else if (checker == 1){
-        text.innerHTML = "20%";
-    }
+    // global variables for comparision
+    var counter = 1;
+    var checker = 0;
+    var flag = true;
+    // function to change text every second
+    function changeText() {
+        var text = document.getElementById("text");
 
-    else if (checker == 2){
-        text.innerHTML = "40%";
-    }
+        // change the text
+        if (checker == 0) {
+            text.innerHTML = "0%";
+        }
+        // change the text
+        else if (checker == 1) {
+            text.innerHTML = "20%";
+        }
 
-    else if (checker == 3){
-        text.innerHTML = "60%";
-    }
+        else if (checker == 2) {
+            text.innerHTML = "40%";
+        }
 
-    else if (checker == 4){
-        text.innerHTML = "80%";
-    }
+        else if (checker == 3) {
+            text.innerHTML = "60%";
+        }
 
-    else if (checker == 5){
-        text.innerHTML = "100%";
-    }
+        else if (checker == 4) {
+            text.innerHTML = "80%";
+        }
 
-    else{
-        checker = 0;
-    }
-    // invrement checker
-    checker ++;
-}
+        else if (checker == 5) {
+            text.innerHTML = "100%";
+        }
 
-   // function to change the text and image every 5 seconds untill the stop button is triggered
-function loadImage(){
-    // get the html tag for the image
-    var image = document.getElementById("dynamicImage");
-    var text = document.getElementById("text");
-    // change the image in every five seconds
-    if (counter == 0){
-        // show the default image
-        image.src = "{% static 'img/step1.jpg' %}"
-
-        // set the current percentage to 0
-        myVar = setInterval(changeText, 1000);
-
+        else {
+            checker = 0;
+        }
+        // invrement checker
+        checker++;
     }
 
-    else if(counter ==1){
-        // show the default image
-        image.src = "{% static 'img/step4.jpg' %}"
+    // function to change the text and image every 5 seconds untill the stop button is triggered
+    function loadImage() {
+        // get the html tag for the image
+        var image = document.getElementById("dynamicImage");
+        var text = document.getElementById("text");
+        // change the image in every five seconds
+        if (counter == 0) {
+            // show the default image
+            image.src = "{% static 'img/step1.jpg' %}"
+            // set the current percentage to 0
+            myVar = setInterval(changeText, 1000);
 
-        // set the current percentage to 0
-        myVar = setInterval(changeText, 1000);
 
+        }
+
+        else if (counter == 1) {
+            // show the default image
+            image.src = "{% static 'img/step4.jpg' %}"
+            // set the current percentage to 0
+            myVar = setInterval(changeText, 1000);
+
+
+
+        }
+
+        else if (counter == 2) {
+            // show the default image
+            image.src = "{% static 'img/step3.jpg' %}"
+            // set the current percentage to 0
+            myVar = setInterval(changeText, 1000);
+
+
+
+        }
+
+        else if (counter == 3) {
+            // show the default image
+            image.src = "{% static 'img/step2.jpg' %}"
+            // set the current percentage to 0
+            myVar = setInterval(changeText, 1000);
+            counter = 0;
+
+
+            // increment counter by 1
+        }
+
+        else {
+            counter = 0;
+        }
+
+        // increment counter
+        counter++;
 
     }
 
-    else if(counter ==2){
-        // show the default image
-        image.src = "{% static 'img/step3.jpg' %}"
+    function loader() {
 
-        // set the current percentage to 0
-        myVar = setInterval(changeText, 1000);
+        myLoad = setInterval(loadImage, 5000);
 
+        var click = document.getElementById("click");
+        click.onclick = function () {
+            clearInterval(myLoad);
+            flag = false;
+        }
 
-    }
-
-    else if(counter ==3){
-        // show the default image
-        image.src = "{% static 'img/step2.jpg' %}"
-
-        // set the current percentage to 0
-        myVar = setInterval(changeText, 1000);
-        counter = 0;
-
-        // increment counter by 1
-    }
-
-    else{
-        counter = 0;
-    }
-
-    // increment counter
-    counter ++;
-
-}
-
-function loader(){
-
-    myLoad = setInterval(loadImage, 5000);
-    
-    var click = document.getElementById("click");
-    click.onclick = function(){
-        clearInterval(myLoad);
-    }
-
-};
+    };
 
 
 

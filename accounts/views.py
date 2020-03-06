@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.sites.shortcuts import get_current_site
-from django.http import HttpResponse
-from django.template.loader import render_to_string
 from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
-
+from .models import *
 
 #  method to register account
 def register_user(request):
@@ -61,7 +57,7 @@ def login_user(request):
                 print("User is notNone") #meaning that the credentials are correct
                 if user.is_active:
                     login(request, user)
-                    return redirect("main:home")
+                    return redirect("accounts:profile")
                 else:
                     return render(request, 'accounts/login.html', {'error-message': 'Your account has been banned.'})
             else:
@@ -76,3 +72,28 @@ def logout_user(request):
         return redirect("accounts:login_user")
     else:
         return redirect("accounts:login_user")
+
+# edit profile
+def profile(request):
+    if request.user.is_authenticated:
+        # get the phone object if exists
+        profile = Profile.objects.filter(user=request.user)
+
+        # check the count
+        if profile.count() >= 1:
+            # prompt to edit the phone number
+            pass
+        else:
+            if request.method == "POST":
+                form = ProfileForm(request.POST or None)
+                if form.is_valid():
+                    data = form.save(commit=False)
+                    data.user = request.user
+                    data.started = True
+                    data.save()
+                    return redirect("main:home")
+            else:
+                form = ProfileForm()
+            return render(request, 'accounts/profile.html', {"form": form})
+    else:
+        return redirect("accounts:login")
